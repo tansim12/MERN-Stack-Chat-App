@@ -17,5 +17,9 @@ import HomeRoute from "./HomeRoute";
         }
       ]
     },
+    {
+      path:"/login",
+      element
+    }
   ]);
 export default router  
