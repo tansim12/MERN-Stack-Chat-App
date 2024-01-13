@@ -4,6 +4,8 @@ import {
     
   } from "react-router-dom";
 import HomeRoute from "./HomeRoute";
+import Login from "../Page/Login/Login";
+import Register from "../Page/Register/Register";
 
   
   
@@ -19,7 +21,11 @@ import HomeRoute from "./HomeRoute";
     },
     {
       path:"/login",
-      element
+      element:<Login />
+    },
+    {
+      path:"/register",
+      element:<Register />
     }
   ]);
 export default router  

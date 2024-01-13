@@ -18,12 +18,10 @@ import { useForm } from "react-hook-form";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 import toast from "react-hot-toast";
-// import { globalInstance } from "../../Hooks/useGlobalInstance";
-
-import hostImage from "../../Utils/Host Image/hostImage";
-import useAuthContext from "../../Hooks/useAuthContext";
-import { globalInstance } from "../../Hooks/useGlobalInstance";
 import { Helmet } from "react-helmet-async";
+import useAuthContext from "../../Utils/useAuthcontext";
+import hostImage from "../../Utils/hostImage";
+import { globalInstance } from "../../Hooks/useGlobalInstance";
 
 const Register = () => {
   const { createUser, profileUpdate } = useAuthContext();

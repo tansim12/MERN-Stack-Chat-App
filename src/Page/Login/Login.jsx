@@ -17,7 +17,8 @@ import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import useAuthContext from "../../Hooks/useAuthContext";
+import useAuthContext from "../../Utils/useAuthcontext";
+
 
 const Login = () => {
   const { login } = useAuthContext();
