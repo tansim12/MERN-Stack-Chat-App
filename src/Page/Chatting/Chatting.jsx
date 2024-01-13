@@ -1,12 +1,23 @@
 import { Button, Container, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
+import { globalInstance } from "../../Hooks/useGlobalInstance";
+import { useState } from "react";
+
+
+
 const Chatting = () => {
+  const [searchUsersData, setSearchUsersData] = useState([])
   //   handleSubmit
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    const info = e.target.name.value;
+    const name = e.target.name.value;
+    const res = await globalInstance.get(`/searchUser?search=${name}`)
+    setSearchUsersData(res?.data)
+    
   };
+
+ 
   return (
     <Container sx={{mt:2}}>
       <div>
