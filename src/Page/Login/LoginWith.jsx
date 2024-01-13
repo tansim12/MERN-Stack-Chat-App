@@ -16,8 +16,8 @@ const LoginWith = () => {
         const name = res?.user?.displayName;
         const email = res?.user?.email;
         const image = res?.user?.photoURL;
-
-        const info = { image, name, email, };
+        const role = "user";
+        const info = { image, name, email,role};
 
         await globalInstance.post("/users", info).then((res) => {
           

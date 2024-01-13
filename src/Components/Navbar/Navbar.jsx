@@ -117,9 +117,11 @@ const Navbar = () => {
                 width: "min-content",
               }}
             >
+
+              {/* sm device logo  */}
               <img
                 style={{ width: "30%" }}
-                src="https://i.ibb.co/qFjmy1b/pngwing-com-9.png"
+                src="https://i.ibb.co/Qnk6smk/pngwing-com-15.png"
                 alt=""
               />
             </Typography>

@@ -2,9 +2,11 @@ import { createBrowserRouter } from "react-router-dom";
 import HomeRoute from "./HomeRoute";
 import Login from "../Page/Login/Login";
 import Register from "../Page/Register/Register";
-import Chatting from "../Page/Chatting/Chatting";
+
 import PrivateRoute from "../Utils/PrivateRoute";
 import Home from "../Page/Home/Home";
+import Chatting from "../Page/Chatting/Chatting";
+
 
 const router = createBrowserRouter([
   {
@@ -21,7 +23,7 @@ const router = createBrowserRouter([
     path: "/chatting",
     element: (
       <PrivateRoute>
-        <Chatting />
+        <Chatting/>
       </PrivateRoute>
     ),
   },

@@ -19,8 +19,8 @@ const Banner = () => {
   }, []);
   return (
     <div className="relative">
-      <div className=" top-0 left-0 w-full  z-50  text-center opacity-100 p-4">
-        <div className="flex flex-col justify-center items-center h-[57vh] ">
+      <div className="absolute  w-full  z-50  text-center opacity-100 p-4">
+        <div className="flex flex-col justify-center items-center h-[60vh] ">
           <p className="text-5xl text-black font-bold">
           Connecting Conversations
           </p>
@@ -36,26 +36,26 @@ const Banner = () => {
           </Button>
         </div>
       </div>
-      <div className=" z-0 object-cover bg-cover">
+      <div className=" z-0 mt-6 object-cover ">
         <Particles
-          id="tsparticles"
+          // id="tsparticles"
           init={particlesInit}
           loaded={particlesLoaded}
-          // className="h-96 border-2 border-black w-full"
+          className="h-96  w-full"
           height="500px"
           
           options={{
             autoPlay: true,
-            background: {
-              color: {
-                value: "#0d47a1",
-              },
-              image: "",
-              position: "",
-              repeat: "",
-              size: "",
-              opacity: 0.4,
-            },
+            // background: {
+            //   color: {
+            //     value: "#0d47a1",
+            //   },
+            //   image: "none",
+            //   position: "cover",
+            //   repeat: "no-repeat",
+            //   size: "",
+            //   opacity: 0.4,
+            // },
             backgroundMask: {
               composite: "destination-out",
               cover: {

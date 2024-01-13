@@ -40,15 +40,15 @@ const Register = () => {
 
     const name = data?.name;
     const email = data?.email;
-    const info = { image, name, email };
+    const role =  "user";
+    const info = { image, name, email, role };
     const toastId = toast.loading("Register Successfully Done");
     createUser(email, data?.password)
       .then(() => {
         profileUpdate(name, image)
           .then(async () => {
             await globalInstance.post("/users", info).then((res) => {
-            
-              if (res.data.success ) {
+              if (res.data.success) {
                 toast.success("Register Successfully done", { id: toastId });
                 navigate("/login");
               }
@@ -61,7 +61,9 @@ const Register = () => {
 
   return (
     <Container component="main" maxWidth="xs">
-      <Helmet><title>Register</title></Helmet>
+      <Helmet>
+        <title>Register</title>
+      </Helmet>
       <CssBaseline />
       <Box
         sx={{
