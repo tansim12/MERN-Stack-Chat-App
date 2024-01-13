@@ -16,17 +16,17 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },{
+        path: "/chatting",
+        element: (
+          <PrivateRoute>
+            <Chatting/>
+          </PrivateRoute>
+        ),
       },
     ],
   },
-  {
-    path: "/chatting",
-    element: (
-      <PrivateRoute>
-        <Chatting/>
-      </PrivateRoute>
-    ),
-  },
+  
   {
     path: "/login",
     element: <Login />,
