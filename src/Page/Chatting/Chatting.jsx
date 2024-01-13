@@ -1,11 +1,4 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  Container,
-  Divider,
-  TextField,
-} from "@mui/material";
+import { Avatar, Button, Container, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { globalInstance } from "../../Hooks/useGlobalInstance";
 import { useState } from "react";
@@ -13,10 +6,11 @@ import Swal from "sweetalert2";
 
 const Chatting = () => {
   const [searchUsersData, setSearchUsersData] = useState([]);
+  const { findOneUserData } = useState({});
 
   // todo some post method here go
   // handleConnectToChatList
-  const handleConnectToChatList = (_id) => {
+  const handleConnectToChatList = (item) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You Start to chat here",
@@ -27,12 +21,27 @@ const Chatting = () => {
       confirmButtonText: "Yes!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        console.log(_id);
-        Swal.fire({
-          title: "Start!",
-          text: "Please Start to Chat",
-          icon: "success",
-        });
+        const creator = {
+          _id: findOneUserData?._id,
+          name: findOneUserData?.name,
+          image: findOneUserData?.image,
+        };
+        const participant = {
+          _id: item?._id,
+          name: item?.name,
+          image: item?.image,
+        };
+        const info = { creator, participant };
+        const res = await globalInstance.post("/conversation", info);
+        const fetchData = res?.data;
+        
+        if (fetchData) {
+          Swal.fire({
+            title: "Start!",
+            text: "Please Start to Chat",
+            icon: "success",
+          });
+        }
       }
     });
   };
@@ -76,7 +85,7 @@ const Chatting = () => {
                 {searchUsersData?.length &&
                   searchUsersData?.map((item) => (
                     <div key={item?._id}>
-                      <div onClick={() => handleConnectToChatList(item?._id)}>
+                      <div className="cursor-pointer" onClick={() => handleConnectToChatList(item)}>
                         <Avatar alt="Remy Sharp" src={item?.image} />
                         <p>{item?.name?.slice(0, 7)}</p>
                       </div>
