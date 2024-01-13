@@ -14,7 +14,7 @@ import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import HomePageNavLink from "./HomePageNavlink";
-import useAuthContext from "../../Utils/useAuthcontext";
+import useAuthContext from "../../Utils/useAuthContext";
 
 
 const Navbar = () => {

@@ -4,7 +4,7 @@ import { useMediaQuery } from "@mui/material";
 import React from "react";
 import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
-
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 const HomePageNavLink = () => {
   const [value, setValue] = React.useState("one");
 
@@ -30,16 +30,11 @@ const HomePageNavLink = () => {
           <Tab value="one" label="Home" to="/" component={Link} />
           <Tab
             value="two"
-            label="Dashboard"
-            to="/dashboard/createToDo"
+            label={<WhatsAppIcon sx={{fontSize:40}} />}
+            to="/chatting"
             component={Link}
           />
-          <Tab
-            value="three"
-            label="Benefits"
-            to="benefits"
-            component={Link}
-          />
+         
           
         </Tabs>
       </Box>

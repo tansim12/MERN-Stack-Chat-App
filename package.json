@@ -24,8 +24,12 @@
     "react-helmet-async": "^2.0.4",
     "react-hook-form": "^7.49.3",
     "react-hot-toast": "^2.4.1",
+    "react-loader-spinner": "^6.1.6",
     "react-router-dom": "^6.21.2",
-    "sort-by": "^1.2.0"
+    "react-tsparticles": "^2.12.2",
+    "sort-by": "^1.2.0",
+    "tsparticles": "^3.0.3",
+    "tsparticles-slim": "^2.12.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

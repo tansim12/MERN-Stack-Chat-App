@@ -2,7 +2,7 @@ import { Box, Button, SvgIcon, Typography } from "@mui/material";
 
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
-import useAuthContext from "../../Utils/useAuthcontext";
+import useAuthContext from "../../Utils/useAuthContext";
 import { globalInstance } from "../../Hooks/useGlobalInstance";
 
 
@@ -13,17 +13,15 @@ const LoginWith = () => {
   const handleLogin = () => {
     googleLogin()
       .then(async (res) => {
-        toast.success("Register Successfully done");
-        navigate(loc?.state ? loc?.state : "/", { replace: true });
-
         const name = res?.user?.displayName;
         const email = res?.user?.email;
         const image = res?.user?.photoURL;
 
-        const info = { image, name, email };
+        const info = { image, name, email, };
 
         await globalInstance.post("/users", info).then((res) => {
-          if (res.data.message === "success") {
+          
+          if (res?.data?.success) {
             toast.success("Register Successfully done");
             navigate(loc?.state ? loc?.state : "/", { replace: true });
           }

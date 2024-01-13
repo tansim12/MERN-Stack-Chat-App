@@ -19,7 +19,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
-import useAuthContext from "../../Utils/useAuthcontext";
+import useAuthContext from "../../Utils/useAuthContext";
 import hostImage from "../../Utils/hostImage";
 import { globalInstance } from "../../Hooks/useGlobalInstance";
 
