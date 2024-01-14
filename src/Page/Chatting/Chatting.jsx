@@ -20,7 +20,7 @@ const Chatting = () => {
 
   const { allChattingMessage, allChattingMessageRefetch } =
     useGetChattingMessage(getConversationInfo?.conversationId);
-  console.log(allChattingMessage);
+  
 
   // handleConnectToChatList
   const handleConnectToChatList = (item) => {
