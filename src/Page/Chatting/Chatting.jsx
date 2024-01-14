@@ -3,12 +3,17 @@ import SearchIcon from "@mui/icons-material/Search";
 import { globalInstance } from "../../Hooks/useGlobalInstance";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import useAuthContext from "../../Utils/useAuthContext";
+import useGetConversations from "../../Hooks/useGetConversations";
+import LeftConversationProfile from "../../Components/Inbox/LeftConversationProfile";
 
 const Chatting = () => {
+  const { user } = useAuthContext();
   const [searchUsersData, setSearchUsersData] = useState([]);
-  const { findOneUserData } = useState({});
 
-  // todo some post method here go
+  const { allConversationData, allConversationDataRefetch } =
+    useGetConversations(user?.email);
+
   // handleConnectToChatList
   const handleConnectToChatList = (item) => {
     Swal.fire({
@@ -21,21 +26,27 @@ const Chatting = () => {
       confirmButtonText: "Yes!",
     }).then(async (result) => {
       if (result.isConfirmed) {
+        const findOneUserData = await globalInstance.get(
+          `/findOneUser?email=${user?.email}`
+        );
+
         const creator = {
-          _id: findOneUserData?._id,
-          name: findOneUserData?.name,
-          image: findOneUserData?.image,
+          id: findOneUserData?.data?._id,
+          name: findOneUserData?.data?.name,
+          image: findOneUserData?.data?.image,
+          email: findOneUserData?.data?.email,
         };
         const participant = {
-          _id: item?._id,
+          id: item?._id,
           name: item?.name,
+          email: item?.email,
           image: item?.image,
         };
         const info = { creator, participant };
         const res = await globalInstance.post("/conversation", info);
         const fetchData = res?.data;
-        
-        if (fetchData) {
+        allConversationDataRefetch();
+        if (fetchData?.success) {
           Swal.fire({
             title: "Start!",
             text: "Please Start to Chat",
@@ -56,7 +67,7 @@ const Chatting = () => {
 
   return (
     <div className="mt-28 min-h-[75vh]">
-      <Container>
+      <Container maxWidth={"xl"}>
         {/* search section  */}
         <div className="mb-10">
           <div className="grid grid-cols-12 items-center gap-5">
@@ -82,19 +93,21 @@ const Chatting = () => {
             {/* search result  */}
             <div className="col-span-12 md:col-span-7 ">
               <div className="flex gap-2 md:gap-10 justify-center items-center flex-wrap ">
-                {searchUsersData?.length &&
+                {searchUsersData?.length ? (
                   searchUsersData?.map((item) => (
                     <div key={item?._id}>
-                      <div className="cursor-pointer" onClick={() => handleConnectToChatList(item)}>
+                      <div
+                        className="cursor-pointer"
+                        onClick={() => handleConnectToChatList(item)}
+                      >
                         <Avatar alt="Remy Sharp" src={item?.image} />
                         <p>{item?.name?.slice(0, 7)}</p>
                       </div>
                     </div>
-                  ))}
-
-                {searchUsersData?.length === 0 && (
+                  ))
+                ) : (
                   <span className="text-red-600 font-bold text-3xl">
-                    There is No data{" "}
+                    😥 There is No data{" "}
                   </span>
                 )}
               </div>
@@ -103,10 +116,14 @@ const Chatting = () => {
         </div>
         {/* conversation  */}
         <div className="grid grid-cols-12 gap-2">
-          {/* left div  */}
-          <div className="col-span-4">left</div>
+          {/* left div conversation profile  */}
+          <div className="col-span-4 md:col-span-3">
+            <LeftConversationProfile
+              allConversationData={allConversationData}
+            />
+          </div>
           {/* right div  */}
-          <div className="col-span-8">right</div>
+          <div className="col-span-8 md:col-span-9">right</div>
         </div>
       </Container>
     </div>
