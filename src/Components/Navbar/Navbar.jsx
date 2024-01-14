@@ -12,14 +12,14 @@ import "./navbar.css";
 
 import { Avatar, Button, MenuItem, Tooltip } from "@mui/material";
 import { Link } from "react-router-dom";
-import toast from "react-hot-toast";
+
 import HomePageNavLink from "./HomePageNavlink";
 import useAuthContext from "../../Utils/useAuthContext";
 import LogOutAndDashboard from "./LogOutAndDashboard";
 
 
 const Navbar = () => {
-  const { user, logOut } = useAuthContext();
+  const { user } = useAuthContext();
 
  
   const [anchorElNav, setAnchorElNav] = React.useState(null);

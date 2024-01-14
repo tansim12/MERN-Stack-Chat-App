@@ -6,13 +6,19 @@ import Swal from "sweetalert2";
 import useAuthContext from "../../Utils/useAuthContext";
 import useGetConversations from "../../Hooks/useGetConversations";
 import LeftConversationProfile from "../../Components/Inbox/LeftConversationProfile";
+import RightSideChattingMessage from "../../Components/Inbox/RightSideChattingMessage";
 
 const Chatting = () => {
   const { user } = useAuthContext();
   const [searchUsersData, setSearchUsersData] = useState([]);
-
   const { allConversationData, allConversationDataRefetch } =
     useGetConversations(user?.email);
+
+    // get conversationId and with which user 
+    const [getConversationInfo, setConversationInfo] = useState({})
+
+    
+    
 
   // handleConnectToChatList
   const handleConnectToChatList = (item) => {
@@ -120,10 +126,13 @@ const Chatting = () => {
           <div className="col-span-4 md:col-span-3">
             <LeftConversationProfile
               allConversationData={allConversationData}
+              setConversationInfo={setConversationInfo}
             />
           </div>
           {/* right div  */}
-          <div className="col-span-8 md:col-span-9">right</div>
+          <div className="col-span-8 md:col-span-9">
+            <RightSideChattingMessage getConversationInfo={getConversationInfo} />
+          </div>
         </div>
       </Container>
     </div>
