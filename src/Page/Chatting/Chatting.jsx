@@ -7,6 +7,7 @@ import useAuthContext from "../../Utils/useAuthContext";
 import useGetConversations from "../../Hooks/useGetConversations";
 import LeftConversationProfile from "../../Components/Inbox/LeftConversationProfile";
 import RightSideChattingMessage from "../../Components/Inbox/RightSideChattingMessage";
+import useGetChattingMessage from "../../Hooks/useGetChattingMessage";
 
 const Chatting = () => {
   const { user } = useAuthContext();
@@ -14,11 +15,12 @@ const Chatting = () => {
   const { allConversationData, allConversationDataRefetch } =
     useGetConversations(user?.email);
 
-    // get conversationId and with which user 
-    const [getConversationInfo, setConversationInfo] = useState({})
+  // get conversationId and with which user
+  const [getConversationInfo, setConversationInfo] = useState({});
 
-    
-    
+  const { allChattingMessage, allChattingMessageRefetch } =
+    useGetChattingMessage(getConversationInfo?.conversationId);
+  console.log(allChattingMessage);
 
   // handleConnectToChatList
   const handleConnectToChatList = (item) => {
@@ -131,7 +133,9 @@ const Chatting = () => {
           </div>
           {/* right div  */}
           <div className="col-span-8 md:col-span-9">
-            <RightSideChattingMessage getConversationInfo={getConversationInfo} />
+            <RightSideChattingMessage
+              getConversationInfo={getConversationInfo}
+            />
           </div>
         </div>
       </Container>

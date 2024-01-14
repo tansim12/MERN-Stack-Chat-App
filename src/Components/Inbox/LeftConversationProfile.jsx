@@ -11,23 +11,36 @@ const LeftConversationProfile = ({
   //   find participant profile
   const findProfile = allConversationData?.map((item) => {
     if (item?.creator?.email === user?.email) {
-      return { profile: item?.participant, conversationId: item?._id };
+      return {
+        profile: item?.participant,
+        conversationId: item?._id,
+        email: item?.email,
+      };
     } else {
-      return { profile: item?.participant, conversationId: item?._id };
+      return {
+        profile: item?.participant,
+        conversationId: item?._id,
+        email: item?.email,
+      };
     }
   });
 
   //   handleChatting
-  const handleChatting = (conversationId, conversationName) => {
-    setConversationInfo({ conversationId, conversationName });
+  const handleChatting = (conversationId, conversationName, email, image) => {
+    setConversationInfo({ conversationId, conversationName, email, image });
   };
 
   return (
-    <div className="border-r-2 p-2 min-h-[75vh] ">
+    <div className="border-r-2 p-2 min-h-[75vh] overflow-scroll scroll-smooth ">
       {findProfile?.map((item) => (
         <div
           onClick={() =>
-            handleChatting(item?.conversationId, item?.profile?.name)
+            handleChatting(
+              item?.conversationId,
+              item?.profile?.name,
+              item?.profile?.email,
+              item?.profile?.image
+            )
           }
           key={item?.profile?.id}
           className="flex justify-center items-center gap-2 my-5 cursor-pointer hover:scale-105 hover:transition-all bg-gray-200 rounded-lg p-2 hover:bg-gray-500"
