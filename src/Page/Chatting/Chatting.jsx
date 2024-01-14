@@ -135,6 +135,8 @@ const Chatting = () => {
           <div className="col-span-8 md:col-span-9">
             <RightSideChattingMessage
               getConversationInfo={getConversationInfo}
+              allChattingMessageRefetch={allChattingMessageRefetch}
+              allChattingMessage={allChattingMessage}
             />
           </div>
         </div>

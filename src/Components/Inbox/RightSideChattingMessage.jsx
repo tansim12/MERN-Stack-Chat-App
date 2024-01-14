@@ -7,11 +7,15 @@ import { useForm } from "react-hook-form";
 import Lottie from "lottie-react";
 import chattingAnimation from "../../assets/chatting.json";
 import useAuthContext from "../../Utils/useAuthContext";
+import { globalInstance } from "../../Hooks/useGlobalInstance";
 
-const RightSideChattingMessage = ({ getConversationInfo }) => {
+const RightSideChattingMessage = ({
+  getConversationInfo,
+  allChattingMessage,
+  allChattingMessageRefetch,
+}) => {
   const { user } = useAuthContext();
-
-  console.log(getConversationInfo);
+  console.log(allChattingMessage);
   const sender = {
     name: user?.displayName,
     email: user?.email,
@@ -45,16 +49,23 @@ const RightSideChattingMessage = ({ getConversationInfo }) => {
       fromData.append("image", img);
       const image = await hostImage(fromData);
       attachment.push(image);
-    } else {
-      attachment.push("");
     }
     const conversationId = getConversationInfo?.conversationId;
-   
+
     const info = {
       text,
       attachment,
-      conversationId,sender, receiver
+      conversationId,
+      sender,
+      receiver,
     };
+    console.log(info);
+    const res = await globalInstance.post("/message", info);
+    const fetchData = res?.data;
+
+    if (fetchData) {
+      allChattingMessageRefetch();
+    }
   };
   return (
     <section className="relative">
