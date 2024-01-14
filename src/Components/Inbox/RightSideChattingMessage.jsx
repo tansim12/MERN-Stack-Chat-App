@@ -8,6 +8,8 @@ import Lottie from "lottie-react";
 import chattingAnimation from "../../assets/chatting.json";
 import useAuthContext from "../../Utils/useAuthContext";
 import { globalInstance } from "../../Hooks/useGlobalInstance";
+import { useState } from "react";
+import ChattingMessage from "./ChattingMessage";
 
 const RightSideChattingMessage = ({
   getConversationInfo,
@@ -15,7 +17,8 @@ const RightSideChattingMessage = ({
   allChattingMessageRefetch,
 }) => {
   const { user } = useAuthContext();
-  console.log(allChattingMessage);
+  const [newMessage, setNewMessage] = useState();
+
   const sender = {
     name: user?.displayName,
     email: user?.email,
@@ -34,7 +37,7 @@ const RightSideChattingMessage = ({
   //   handleMessageSend
   const {
     register,
-    handleSubmit,
+    handleSubmit,reset ,
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
@@ -59,14 +62,18 @@ const RightSideChattingMessage = ({
       sender,
       receiver,
     };
-    console.log(info);
+
     const res = await globalInstance.post("/message", info);
     const fetchData = res?.data;
 
     if (fetchData) {
+      setNewMessage(fetchData);
       allChattingMessageRefetch();
+      reset();
     }
+    
   };
+
   return (
     <section className="relative">
       <div>
@@ -96,8 +103,15 @@ const RightSideChattingMessage = ({
         <div>
           <div className="bg-gray-600 overflow-scroll scroll-smooth h-[500px]">
             {/* all message showing here  */}
-            <div className="max-h-screen  text-7xl"> hello</div>
-            <div className="h-screen  text-7xl"> hello</div>
+
+            <div>
+              <ChattingMessage
+              getConversationInfo={getConversationInfo}
+                allChattingMessage={allChattingMessage}
+                newMessage={newMessage}
+              />
+            </div>
+            
           </div>
 
           {/* message from div  */}
