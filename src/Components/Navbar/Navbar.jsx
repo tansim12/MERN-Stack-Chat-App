@@ -10,23 +10,32 @@ import Container from "@mui/material/Container";
 import "./navbar.css";
 
 
-import { Button } from "@mui/material";
+import { Avatar, Button, MenuItem, Tooltip } from "@mui/material";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import HomePageNavLink from "./HomePageNavlink";
 import useAuthContext from "../../Utils/useAuthContext";
+import LogOutAndDashboard from "./LogOutAndDashboard";
 
 
 const Navbar = () => {
   const { user, logOut } = useAuthContext();
 
+ 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  // handleLogOut
-  const handleLogOut = () => {
-    logOut();
-    toast.success("Logout Successfully done");
+  
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
   };
+
+ 
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+ 
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -130,7 +139,7 @@ const Navbar = () => {
               <HomePageNavLink></HomePageNavLink>
             </Box>
             {/* Login and logout button  */}
-            {!user ? (
+            {/* {!user ? (
               <Link to={"/login"}>
                 <Button variant="contained" color="secondary">Login</Button>
               </Link>
@@ -138,6 +147,63 @@ const Navbar = () => {
               <Button onClick={handleLogOut} variant="contained" color="secondary">
                 Log Out
               </Button>
+            )} */}
+
+{!user ? (
+              <Link to={"/login"}>
+                <Button
+                  variant="outlined"
+                  sx={{
+                    bgcolor: "white",
+                    ":hover": {
+                      bgcolor: "unset",
+                    },
+                  }}
+                  color="secondary"
+                >
+                  Login
+                </Button>
+              </Link>
+            ) : (
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Open settings">
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      p: 1,
+                      gap: 1,
+                    }}
+                  >
+                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                      <Avatar alt="Remy Sharp" src={user?.photoURL} />
+                    </IconButton>
+                    <Typography variant="body">
+                      {user?.displayName?.slice(0, 8)}
+                    </Typography>
+                  </Box>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  <MenuItem onClick={handleCloseUserMenu}>
+                    <LogOutAndDashboard></LogOutAndDashboard>
+                  </MenuItem>
+                </Menu>
+              </Box>
             )}
           </Toolbar>
         </Container>
