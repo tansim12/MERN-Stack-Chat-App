@@ -8,6 +8,7 @@ import useGetConversations from "../../Hooks/useGetConversations";
 import LeftConversationProfile from "../../Components/Inbox/LeftConversationProfile";
 import RightSideChattingMessage from "../../Components/Inbox/RightSideChattingMessage";
 import useGetChattingMessage from "../../Hooks/useGetChattingMessage";
+import { Helmet } from "react-helmet-async";
 
 const Chatting = () => {
   const { user } = useAuthContext();
@@ -75,6 +76,7 @@ const Chatting = () => {
 
   return (
     <div className="mt-28 min-h-[75vh]">
+      <Helmet><title>Chatting</title></Helmet>
       <Container maxWidth={"xl"}>
         {/* search section  */}
         <div className="mb-10">

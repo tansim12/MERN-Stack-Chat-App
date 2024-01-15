@@ -43,15 +43,16 @@ const RightSideChattingMessage = ({
   const onSubmit = async (data) => {
     const attachment = [];
     const text = data?.massage;
-    if (!text?.length) {
-      return toast.error(" Type your text");
-    }
+   
     if (data?.image[0]) {
       const img = data?.image[0];
       const fromData = new FormData();
       fromData.append("image", img);
       const image = await hostImage(fromData);
       attachment.push(image);
+    }
+    if (!text?.length && !attachment?.length) {
+      return toast.error(" Type your text");
     }
     const conversationId = getConversationInfo?.conversationId;
 
@@ -104,7 +105,7 @@ const RightSideChattingMessage = ({
           <div className="bg-gray-600 overflow-scroll scroll-smooth h-[500px]">
             {/* all message showing here  */}
 
-            <div>
+            <div >
               <ChattingMessage
               getConversationInfo={getConversationInfo}
                 allChattingMessage={allChattingMessage}
@@ -115,7 +116,7 @@ const RightSideChattingMessage = ({
           </div>
 
           {/* message from div  */}
-          <div className="absolute bottom-0  w-full ">
+          <div className=" bottom-0  w-full ">
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="items-center w-full"
