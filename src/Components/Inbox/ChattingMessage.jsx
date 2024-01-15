@@ -1,5 +1,9 @@
 import { Avatar } from "@mui/material";
 import useAuthContext from "../../Utils/useAuthContext";
+// import { useEffect } from "react";
+// import io from 'socket.io-client';
+
+
 
 const ChattingMessage = ({
   allChattingMessage,
@@ -7,7 +11,18 @@ const ChattingMessage = ({
   getConversationInfo,
 }) => {
   const { user } = useAuthContext();
-  console.log(allChattingMessage);
+ 
+  // useEffect(() => {
+  //   const socket = io('https://mern-stack-chat-app-server.vercel.app');
+  //   socket.on('new_message', data => {
+  //     console.log('Received new message:', data);
+  //   });
+  
+  //   return () => {
+  //     socket.disconnect(); // Cleanup on component unmount
+  //     console.log('Socket disconnected');
+  //   };
+  // }, [allChattingMessage,newMessage]);
   return (
     <div>
       <div className="max-h-screen p-3 ">

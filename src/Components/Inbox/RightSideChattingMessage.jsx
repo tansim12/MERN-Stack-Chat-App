@@ -10,6 +10,7 @@ import useAuthContext from "../../Utils/useAuthContext";
 import { globalInstance } from "../../Hooks/useGlobalInstance";
 import { useState } from "react";
 import ChattingMessage from "./ChattingMessage";
+import Swal from "sweetalert2";
 
 const RightSideChattingMessage = ({
   getConversationInfo,
@@ -32,18 +33,41 @@ const RightSideChattingMessage = ({
   // handleDeleteConversation
   // todo delete chatting message
   const handleDeleteConversation = (_id) => {
-    console.log(_id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await globalInstance.delete(`/message/${_id}`);
+        const fetchData = res?.data;
+       
+        if (fetchData?.success) {
+          allChattingMessageRefetch()
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+        }
+      }
+    });
   };
   //   handleMessageSend
   const {
     register,
-    handleSubmit,reset ,
+    handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
     const attachment = [];
     const text = data?.massage;
-   
+
     if (data?.image[0]) {
       const img = data?.image[0];
       const fromData = new FormData();
@@ -72,7 +96,6 @@ const RightSideChattingMessage = ({
       allChattingMessageRefetch();
       reset();
     }
-    
   };
 
   return (
@@ -105,14 +128,13 @@ const RightSideChattingMessage = ({
           <div className="bg-gray-600 overflow-scroll scroll-smooth h-[500px]">
             {/* all message showing here  */}
 
-            <div >
+            <div>
               <ChattingMessage
-              getConversationInfo={getConversationInfo}
+                getConversationInfo={getConversationInfo}
                 allChattingMessage={allChattingMessage}
                 newMessage={newMessage}
               />
             </div>
-            
           </div>
 
           {/* message from div  */}

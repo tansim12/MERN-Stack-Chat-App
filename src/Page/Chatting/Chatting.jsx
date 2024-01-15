@@ -117,7 +117,7 @@ const Chatting = () => {
                   ))
                 ) : (
                   <span className="text-red-600 font-bold text-3xl">
-                    😥 There is No data{" "}
+                    😥 No Search Data{" "}
                   </span>
                 )}
               </div>
