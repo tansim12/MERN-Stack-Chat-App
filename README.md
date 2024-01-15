@@ -1,8 +1,10 @@
-# React + Vite
+## Project Features
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- My project backend is managed by Mongoose.
+- My Project Frontend side or UI used by Material UI and Tailwind CSS.
+- Using Tsparticles creating animation Banner.
 
-Currently, two official plugins are available:
+## Live Links
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Client Side Live Link](https://funny-lily-53526d.netlify.app/)
+- [Backend Github Link](https://github.com/tansim12/MERN-Stack-Chat-App-Server)
