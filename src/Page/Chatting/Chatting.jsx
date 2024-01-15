@@ -9,6 +9,7 @@ import LeftConversationProfile from "../../Components/Inbox/LeftConversationProf
 import RightSideChattingMessage from "../../Components/Inbox/RightSideChattingMessage";
 import useGetChattingMessage from "../../Hooks/useGetChattingMessage";
 import { Helmet } from "react-helmet-async";
+import BackgroundSVG from '../../assets/bg.svg';
 
 const Chatting = () => {
   const { user } = useAuthContext();
@@ -75,14 +76,25 @@ const Chatting = () => {
   };
 
   return (
-    <div className="mt-28 min-h-[75vh]">
+    <div className="mt-20 h-[85vh]"
+    style={ {
+      backgroundImage: `url(${BackgroundSVG})`,
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      width: '100%',
+      height: '100vh',
+      // Add other styles as needed
+    }}
+    >
       <Helmet><title>Chatting</title></Helmet>
       <Container maxWidth={"xl"}>
         {/* search section  */}
-        <div className="mb-10">
-          <div className="grid grid-cols-12 items-center gap-5">
+        <div className="mb-10 ">
+          <div className="grid grid-cols-12 items-center gap-5 pt-7 p-4 rounded-3xl" style={{
+                  boxShadow: "13px 69px 91px 38px rgba(0,0,0,0.6), 0px 45px 26px 0px rgba(0,0,0,0.14)",
+                }}>
             {/* from   */}
-            <div className="col-span-12 md:col-span-5">
+            <div className="col-span-12 md:col-span-5" >
               <form
                 onSubmit={handleSubmit}
                 className="flex justify-center items-center gap-1"
@@ -92,6 +104,7 @@ const Chatting = () => {
                   id="filled-basic"
                   label="Search Friend"
                   variant="filled"
+                  sx={{bgcolor:"gray"}}
                   required
                 />
                 <Button sx={{ padding: 2 }} type="submit" variant="contained">

@@ -46,16 +46,16 @@ const Banner = () => {
           
           options={{
             autoPlay: true,
-            // background: {
-            //   color: {
-            //     value: "#0d47a1",
-            //   },
-            //   image: "none",
-            //   position: "cover",
-            //   repeat: "no-repeat",
-            //   size: "",
-            //   opacity: 0.4,
-            // },
+            background: {
+              color: {
+                value: "#0d47a1",
+              },
+              image: "none",
+              position: "cover",
+              repeat: "no-repeat",
+              size: "",
+              opacity: 0.4,
+            },
             backgroundMask: {
               composite: "destination-out",
               cover: {

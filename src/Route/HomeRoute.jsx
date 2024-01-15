@@ -10,7 +10,7 @@ const HomeRoute = () => {
         <Navbar />
       </div>
       {/* Outlet  */}
-      <div>
+      <div className="min-h-[60vh]">
         <Outlet />
       </div>
       {/* footer  */}

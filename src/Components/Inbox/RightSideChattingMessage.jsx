@@ -11,6 +11,7 @@ import { globalInstance } from "../../Hooks/useGlobalInstance";
 import { useState } from "react";
 import ChattingMessage from "./ChattingMessage";
 import Swal from "sweetalert2";
+import { Avatar } from "@mui/material";
 
 const RightSideChattingMessage = ({
   getConversationInfo,
@@ -103,10 +104,13 @@ const RightSideChattingMessage = ({
       <div>
         {/* upper div when user name and delete option  */}
         {getConversationInfo?.conversationId && (
-          <div className="bg-gray-500 flex justify-between p-4 rounded-t-3xl">
-            <p className="text-xl font-black text-white">
-              {getConversationInfo?.conversationName?.toUpperCase()}
+          <div className="bg-gray-500 flex justify-between items-center px-6 py-2 rounded-t-3xl">
+            <div className="flex flex-col items-center">
+            <Avatar alt="A" src={getConversationInfo?.image} sx={{ width: 24, height: 24 }} />
+            <p className="text-sm font-black text-white">
+              {getConversationInfo?.conversationName?.slice(0,6)?.toUpperCase()}
             </p>
+            </div>
             <div
               className="cursor-pointer hover:scale-x-125 hover:transition-all"
               onClick={() =>
@@ -125,7 +129,7 @@ const RightSideChattingMessage = ({
       {/* chatting and messaging div  */}
       {getConversationInfo?.conversationId ? (
         <div>
-          <div className="bg-gray-600 overflow-scroll scroll-smooth h-[500px]">
+          <div className=" overflow-scroll scroll-smooth h-[420px]">
             {/* all message showing here  */}
 
             <div>

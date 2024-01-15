@@ -28,13 +28,12 @@ const LeftConversationProfile = ({
   const handleChatting = (conversationId, conversationName, email, image) => {
     setConversationInfo({ conversationId, conversationName, email, image });
   };
-  
 
   return (
     <>
-      <div className="border-r-2 p-2 h-[75vh]  ">
-        {allConversationData?.length >0 ? (
-          <div className="overflow-scroll scroll-smooth h-[75vh] ">
+      <div className="">
+        {allConversationData?.length > 0 ? (
+          <div className="overflow-y-scroll scroll-smooth h-[75vh] p-4">
             {findProfile?.map((item) => (
               <div
                 onClick={() =>
@@ -46,7 +45,11 @@ const LeftConversationProfile = ({
                   )
                 }
                 key={item?.profile?.id}
-                className="flex justify-center items-center gap-2 my-5 cursor-pointer hover:scale-105 hover:transition-all bg-gray-200 rounded-lg p-2 hover:bg-gray-500"
+                className="flex justify-center items-center gap-2 my-5 cursor-pointer hover:scale-105 hover:transition-all  rounded-lg p-2 hover:bg-gray-300 border-2 border-black  "
+              style={{
+                // box-shadow:"30px 30px 60px 0px #A6ABBD inset, -30px -30px 60px 0px #FAFBFF inset"
+                boxShadow: "30px 30px 60px 0px #A6ABBD , -30px -30px 60px 0px  inset",
+              }}
               >
                 <div>
                   <Avatar
@@ -58,7 +61,7 @@ const LeftConversationProfile = ({
                     }
                   />
                 </div>
-                <p className="flex-grow">
+                <p className="flex-grow text-white hover:text-black">
                   {item?.profile?.name.slice(0, 10).toUpperCase()}
                 </p>
               </div>
@@ -66,8 +69,11 @@ const LeftConversationProfile = ({
           </div>
         ) : (
           <span className="flex flex-col justify-center items-center h-96">
-            <span className="text-sm md:text-base">Your Have No Friend😥</span> <br />
-            <span className="text-xl md:text-2xl text-red-600 font-bold">Please Search Friend 👆🏻</span>
+            <span className="text-sm md:text-base">Your Have No Friend😥</span>{" "}
+            <br />
+            <span className="text-xl md:text-2xl text-red-600 font-bold">
+              Please Search Friend 👆🏻
+            </span>
           </span>
         )}
       </div>
